@@ -3,6 +3,18 @@
   background: #F0F2F5;
 }
 
+.ant-layout-sider{
+  background: #F0F2F5;
+}
+
+.ant-layout {
+  background: #F0F2F5;
+}
+
+.ant-layout .ant-layout-content{
+  padding: 50px !important;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

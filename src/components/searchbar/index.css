@@ -1,9 +1,10 @@
 .ant-input-search{
-    width: 80%;
+    width: 90%;
     height: 50px;
     margin: auto;
     display: block;
 }
 .ant-input-search button{
   height: 50px;
+  width: 100px;
 }

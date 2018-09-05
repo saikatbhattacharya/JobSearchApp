@@ -35,7 +35,7 @@ class Searchbar extends React.Component {
   render() {
     return (
       <Search
-        placeholder="input search text"
+        placeholder="Search by keywords (Java, PHP etc)"
         enterButton="Search"
         size="large"
         onSearch={value => console.log(value)}

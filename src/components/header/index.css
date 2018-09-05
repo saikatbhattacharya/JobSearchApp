@@ -9,3 +9,11 @@
 .ant-layout-header{
   background: white !important;
 }
+.menu-items{
+    float: right;
+    display: inline-block;
+    text-transform: uppercase;
+}
+.menu-text{
+  margin: 0 10px;
+}

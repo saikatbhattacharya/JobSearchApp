@@ -1,0 +1,9 @@
+.content-body{
+  padding: 50px;
+  background: white;
+}
+h3{
+  z-index: 2000;
+  display: block;
+  float: left;
+}
