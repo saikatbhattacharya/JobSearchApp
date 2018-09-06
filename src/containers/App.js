@@ -8,7 +8,11 @@ import 'antd/dist/antd.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const style = { background: '#F0F2F5', padding: '50px' };
+const style = {
+  leftSideBar: { background: '#F0F2F5', padding: '50px 50px 0 0' },
+  content: { background: '#F0F2F5', padding: '50px' },
+  rightSideBar: { background: '#F0F2F5', padding: '50px 0 0 50px' }
+}
 
 class App extends React.Component {
   render() {
@@ -18,10 +22,10 @@ class App extends React.Component {
       <Layout style={{marginTop: 45}}>
         <Content><Searchbar /></Content>
       </Layout>
-      <Layout>
-        <Sider style={style} width={300} ><LeftSideBar /></Sider>
-        <Content style={style}><ContentSection /></Content>
-        <Sider style={style} width={300} ><div /></Sider>
+      <Layout style={{width: '90%', margin: 'auto'}}>
+        <Sider style={style.leftSideBar} width={300} ><LeftSideBar /></Sider>
+        <Content style={style.content}><ContentSection /></Content>
+        <Sider style={style.rightSideBar} width={300} ><div /></Sider>
       </Layout>
       <Footer>Footer</Footer>
     </Layout>

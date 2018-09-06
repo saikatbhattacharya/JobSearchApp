@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditableTagGroup, Checkboxes, FilterHeader } from '../common';
+import { EditableTagGroup, Checkboxes, FilterHeader, SliderComponent } from '../common';
 import { Row, Divider, Menu, Dropdown, Button, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
@@ -50,6 +50,7 @@ class LeftSideBar extends React.Component {
         </Row>
         <Row>
           <FilterHeader name="Availability" />
+          <div className="availibility">
           {
             this.jobTypes.map((each, index) => {
               return <React.Fragment>
@@ -58,14 +59,24 @@ class LeftSideBar extends React.Component {
               </React.Fragment>
             })
           }
+          </div>
         </Row>
         <Row>
           <FilterHeader name="Job Type" />
           <Dropdown className="menu-text" overlay={menu}>
-            <Button style={{width: '100%', margin: 0}}>
+            <Button style={{width: '100%', margin: 0, height: 45, fontSize: 11, fontWeight: 100}}>
               <span style={{float: 'left'}}>Select a job type</span> <Icon style={{float:'right'}} type="down" />
             </Button>
           </Dropdown>
+        </Row>
+        <Row className="pay-rate-filter">
+          <FilterHeader name="Pay Rate / hr ($)" />
+          <SliderComponent />
+        </Row>
+        <Row>
+          <Button className="apply-button" type="primary">
+            Apply Filters<Icon type="right" />
+          </Button>
         </Row>
       </React.Fragment>
     )

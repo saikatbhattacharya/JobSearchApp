@@ -5,7 +5,7 @@ import { Tag, Input, Tooltip, Icon } from 'antd';
 
 class EditableTagGroup extends React.Component {
   state = {
-    tags: ['Unremovable', 'Tag 2', 'Tag 3'],
+    tags: [],
     inputVisible: false,
     inputValue: '',
   };
@@ -44,11 +44,11 @@ class EditableTagGroup extends React.Component {
   render() {
     const { tags, inputVisible, inputValue } = this.state;
     return (
-      <div style={{background: 'white', padding: 5, marginBottom: 40}}>
+      <div style={{background: 'white', padding: 5}}>
         {tags.map((tag, index) => {
           const isLongTag = tag.length > 20;
           const tagElem = (
-            <Tag key={tag} closable={index !== 0} afterClose={() => this.handleClose(tag)}>
+            <Tag style={{margin: 5}} key={tag} closable afterClose={() => this.handleClose(tag)}>
               {isLongTag ? `${tag.slice(0, 20)}...` : tag}
             </Tag>
           );
@@ -71,7 +71,7 @@ class EditableTagGroup extends React.Component {
             onClick={this.showInput}
             style={{ background: '#fff', borderStyle: 'dashed' }}
           >
-            <Icon type="plus" /> New Tag
+            <Icon type="plus" /> Add Skill
           </Tag>
         )}
       </div>
