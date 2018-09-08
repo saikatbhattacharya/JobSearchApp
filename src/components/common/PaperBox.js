@@ -9,7 +9,7 @@ const PaperBox = props => (
     <Row>
       <h3>{props.jobTitle}</h3>
       <span className="availability-tag">{props.availability}</span>
-      <span className="payment">{props.payment}</span>
+      <span className="payment">${props.payment} / hr</span>
     </Row>
     <Row>
       <Icon style={{color: '#43A3FF', fontSize: 18, marginRight: 2}} type="bank" />
