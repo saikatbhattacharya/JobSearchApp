@@ -1,5 +1,6 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import { Tag, Input, Tooltip, Icon } from 'antd';
 
@@ -37,6 +38,7 @@ class EditableTagGroup extends React.Component {
       inputVisible: false,
       inputValue: '',
     });
+    this.props.handleTagInput(tags);
   }
 
   saveInputRef = input => this.input = input
@@ -77,6 +79,10 @@ class EditableTagGroup extends React.Component {
       </div>
     );
   }
+}
+
+EditableTagGroup.propTypes = {
+  handleTagInput: PropTypes.func.isRequired
 }
 
 export default EditableTagGroup;

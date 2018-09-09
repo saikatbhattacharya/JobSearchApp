@@ -1,5 +1,5 @@
 import React from 'react';
-import { JobContext, SearchContext } from '../contexts';
+import { JobContext, SearchContext, FilterContext } from '../contexts';
 
 const JobProvider = props => (
   <JobContext.Provider value={props.value}>
@@ -13,7 +13,14 @@ const SearchProvider = props => (
   </SearchContext.Provider>
 );
 
+const FilterProvider = props => (
+  <FilterContext.Provider value={props.value}>
+    {props.children}
+  </FilterContext.Provider>
+);
+
 export {
   JobProvider,
-  SearchProvider
+  SearchProvider,
+  FilterProvider
 }

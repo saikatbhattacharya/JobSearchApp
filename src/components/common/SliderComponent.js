@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import { Slider, InputNumber } from 'antd';
 
@@ -16,7 +17,8 @@ class SliderComponent extends React.Component{
     this.setState({
       startValue: value[0],
       endValue: value[1]
-    })
+    });
+    this.props.payRateChange(value);
   }
 
   handleNumberChange(value, position) {
@@ -37,6 +39,10 @@ class SliderComponent extends React.Component{
       </div>
     )
   }
+}
+
+SliderComponent.propTypes = {
+  payRateChange: PropTypes.func.isRequired
 }
 
 export default SliderComponent;

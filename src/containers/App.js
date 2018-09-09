@@ -8,7 +8,7 @@ import ContentSection from '../components/content';
 import 'antd/dist/antd.css';
 import config from '../configs';
 // import { JobContext } from '../contexts';
-import { JobProvider, SearchProvider } from './Provider';
+import { JobProvider, SearchProvider, FilterProvider } from './Provider';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -27,6 +27,7 @@ class App extends React.Component {
     }
     this.callApi = this.callApi.bind(this);
     this.searchJob = this.searchJob.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
   }
 
   callApi(url) {
@@ -45,6 +46,15 @@ class App extends React.Component {
     this.callApi(url);
   }
 
+  applyFilter(filters) {
+    const { selectedSkills, selectedAvailability, selectedJobTypes, selectedPayRate } = filters;
+    let url = `http://${config.apiHost}:${config.apiPort}/jobs?payRate=${selectedPayRate.join(',')}`;
+    if (selectedSkills.length) url = url.concat(`&skills=${selectedSkills.join(',')}`)
+    if (selectedAvailability.length) url = url.concat(`&availability=${selectedAvailability.join(',')}`)
+    if (selectedJobTypes.length) url = url.concat(`&jobType=${selectedJobTypes}`)
+    this.callApi(url);
+  }
+
   render() {
     return (
       <Layout>
@@ -55,7 +65,9 @@ class App extends React.Component {
           </SearchProvider>
         </Layout>
         <Layout style={{width: '90%', margin: 'auto'}}>
-          <Sider style={style.leftSideBar} width={300} ><LeftSideBar /></Sider>
+          <FilterProvider value={{applyFilter: this.applyFilter}}>
+            <Sider style={style.leftSideBar} width={300} ><LeftSideBar /></Sider>
+          </FilterProvider>
           <JobProvider value={{jobList: this.state.jobList}}>
               <Content style={style.content}><ContentSection /></Content>
           </JobProvider>

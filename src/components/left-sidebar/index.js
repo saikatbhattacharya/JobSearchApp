@@ -1,43 +1,55 @@
 import React from 'react';
 import { EditableTagGroup, Checkboxes, FilterHeader, SliderComponent } from '../common';
-import { Row, Divider, Menu, Dropdown, Button, Icon } from 'antd';
+import { FilterContext } from '../../contexts'
+import { Row, Divider, Menu, Select, Button, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
 
-const menu = (
-  <Menu>
-    <Menu.Item key="1"><Icon type="user" />1st menu item</Menu.Item>
-    <Menu.Item key="2"><Icon type="user" />2nd menu item</Menu.Item>
-    <Menu.Item key="3"><Icon type="user" />3rd item</Menu.Item>
-  </Menu>
-);
+const Option = { Select };
 
 class LeftSideBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedJobTypes: []
+      selectedJobTypes: '',
+      selectedPayRate: [],
+      selectedSkills: [],
+      selectedAvailability: []
     };
-    this.jobTypes = [
+    this.availability = [
       'Hourly', 'Full-time', 'Part-time'
     ];
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
+    this.handleJobTypeChange = this.handleJobTypeChange.bind(this);
+    this.payRateChange = this.payRateChange.bind(this);
+    this.handleTagInput = this.handleTagInput.bind(this);
   }
 
   onCheckboxChange = (e, index) => {
     console.log(`checked = ${e.target.checked}, index = ${index}`);
-    let selectedJobTypes = this.state.selectedJobTypes;
+    let { selectedAvailability } = this.state;
     if (e.target.checked) {
-      selectedJobTypes.push(this.jobTypes[index]);
+      selectedAvailability = [...selectedAvailability ,this.availability[index]];
     } else {
-      selectedJobTypes.splice(
-        selectedJobTypes.indexOf(this.jobTypes[index]), 1
+      selectedAvailability.splice(
+        selectedAvailability.indexOf(this.availability[index]), 1
       )
     }
-    this.setState({ selectedJobTypes });
+    this.setState({ selectedAvailability });
+  }
+
+  handleJobTypeChange = (value) => {
+    this.setState({ selectedJobTypes: value });
+  }
+  payRateChange = (selectedPayRate) => {
+    this.setState({ selectedPayRate });
+  }
+  handleTagInput = (selectedSkills) => {
+    this.setState({ selectedSkills })
   }
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <Row>
@@ -46,13 +58,13 @@ class LeftSideBar extends React.Component {
         </Row>
         <Row>
           <FilterHeader name="Skills" />
-          <EditableTagGroup className="tagGroup" />
+          <EditableTagGroup className="tagGroup" handleTagInput={this.handleTagInput} />
         </Row>
         <Row>
           <FilterHeader name="Availability" />
           <div className="availibility">
           {
-            this.jobTypes.map((each, index) => {
+            this.availability.map((each, index) => {
               return <React.Fragment>
                 <Checkboxes key={index} label={each} index={index} onChange={this.onCheckboxChange} />
                 <br />
@@ -63,20 +75,29 @@ class LeftSideBar extends React.Component {
         </Row>
         <Row>
           <FilterHeader name="Job Type" />
-          <Dropdown className="menu-text" overlay={menu}>
-            <Button style={{width: '100%', margin: 0, height: 45, fontSize: 11, fontWeight: 100}}>
-              <span style={{float: 'left'}}>Select a job type</span> <Icon style={{float:'right'}} type="down" />
-            </Button>
-          </Dropdown>
+          <Select
+            style={{ width: '100%', margin: 0, height: 45, fontSize: 11, fontWeight: 100 }}
+            onChange={this.handleJobTypeChange}
+            placeholder="Select a jobtype"
+            optionFilterProp="children"
+          >
+            <Option value="it">IT</Option>
+            <Option value="non-it">non-IT</Option>
+          </Select>
         </Row>
         <Row className="pay-rate-filter">
           <FilterHeader name="Pay Rate / hr ($)" />
-          <SliderComponent />
+          <SliderComponent payRateChange={this.payRateChange} />
         </Row>
         <Row>
-          <Button className="apply-button" type="primary">
-            Apply Filters<Icon type="right" />
-          </Button>
+          <FilterContext.Consumer>
+            {context => (
+              <Button className="apply-button" type="primary" onClick={() => context.applyFilter(this.state)}>
+                Apply Filters<Icon type="right" />
+              </Button>
+            )
+            }
+          </FilterContext.Consumer>>
         </Row>
       </React.Fragment>
     )
