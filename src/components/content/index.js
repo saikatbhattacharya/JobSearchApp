@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row } from 'antd';
 import 'antd/dist/antd.css';
 import './index.css';
 import { JobContext } from '../../contexts';
@@ -7,10 +6,6 @@ import { JobContext } from '../../contexts';
 import { PaperBox } from '../common';
 
 class Content extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <JobContext.Consumer>

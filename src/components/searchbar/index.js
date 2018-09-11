@@ -5,9 +5,6 @@ import { Input } from 'antd';
 import { SearchContext } from '../../contexts';
 
 const { Search } = Input;
-function onSelect(value) {
-  console.log("onSelect", value);
-}
 
 function getRandomInt(max, min = 0) {
   return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
