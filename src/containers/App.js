@@ -31,6 +31,7 @@ class App extends React.Component {
   }
 
   callApi(url) {
+    console.log('********** ', url);
     axios.get(url)
       .then(result => this.setState({jobList: result.data}))
       .catch(e => console.log(e))
