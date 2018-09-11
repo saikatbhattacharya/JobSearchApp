@@ -25,8 +25,8 @@ const PaperBox = props => (
     </Row>
     <Row className="jobDescRow">
       {
-        props.tags.map(each => (
-          <span className="job-tag">{each}</span>
+        props.tags.map((each, i) => (
+          <span key={i} className="job-tag">{each}</span>
         ))
       }
     </Row>
@@ -36,10 +36,10 @@ const PaperBox = props => (
 PaperBox.propTypes = {
   jobTitle: PropTypes.string.isRequired,
   availability: PropTypes.string.isRequired,
-  payment: PropTypes.string.isRequired,
+  payment: PropTypes.number.isRequired,
   companyName: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  replyRate: PropTypes.string.isRequired,
+  replyRate: PropTypes.number.isRequired,
   jobDesc: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired
 };
